@@ -14,12 +14,14 @@ public class CatalogueTest {
 
     private LibraryBook bladeRunner;
     private LibraryBook endersGame;
+    private LibraryBook stark;
     private LibraryCatalogue library;
 
     @Before
     public void buildup() {
         bladeRunner = new LibraryBook("BladeRunner", 1);
         endersGame = new LibraryBook("EndersGame", 2);
+        stark = new LibraryBook("Stark", 3);
         library = new LibraryCatalogue();
     }
 
@@ -64,5 +66,14 @@ public class CatalogueTest {
         String output = library.get(2);
         assertEquals(expected, output);
 
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testEmptyRemove() {
+        library.add(bladeRunner);
+        library.add(endersGame);
+        library.remove(stark);
+        String expected = "NotPresent";
+        String output = library.get(1);
     }
 }
